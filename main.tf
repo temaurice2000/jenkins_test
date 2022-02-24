@@ -11,16 +11,18 @@ variable "env" {}
 
 resource "aws_vpc" "Ansible_vpc" {
   cidr_block = var.vpc_cidr_block
+  
   tags = {
     Name : "${var.env}-vpc"
   }
 }
+
 resource "aws_subnet" "Public_subnet" {
   cidr_block = var.Public_subnet_cidr_block
   tags = {
     Name : "${var.env}-pub_subnet"
   }
-  vpc_id = aws_vpc.Ansible_vpc.id  
+  vpc_id = aws_vpc.Ansible_vpc.id    
   availability_zone = var.avail_zone1
 }
 resource "aws_subnet" "Private_subnet" {
